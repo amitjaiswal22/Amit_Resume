@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Jaiswal | Software Engineer</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --header-bg: linear-gradient(to bottom, #ffffff, #f1f5f9);
+            --footer-bg: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --header-bg: linear-gradient(to bottom, #1e293b, #0f172a);
+            --footer-bg: #090d16;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        body {
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle-container {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+        }
+        .theme-btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .theme-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        header {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 5rem 2rem 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        header h1 {
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        header p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 1.5rem auto;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+        h2 {
+            font-size: 1.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .card-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.75rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        /* Fixed Technical Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 650px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .skill-category {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+        .skill-category h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header>
+        <div class="theme-toggle-container">
+            <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">☀️ Light Mode</button>
+        </div>
+        <h1>Amit Jaiswal</h1>
+        <p>Software Engineer specializing in endpoint security solutions, backend systems, and infrastructure automation.</p>
+        <div class="social-links">
+            <a href="mailto:amitjaiswalcode@gmail.com" class="btn">Email</a>
+            <a href="https://www.linkedin.com/in/amit-jaiswal-927067218/" target="_blank" class="btn">LinkedIn</a>
+            <a href="https://leetcode.com/u/mitwaaa/" target="_blank" class="btn">LeetCode (1725)</a>
+            <a href="https://www.codechef.com/users/school_band_94" target="_blank" class="btn">CodeChef (4-Star)</a>
+            <a href="#resume" class="btn btn-primary">View Resume</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Experience -->
+        <section>
+            <h2>Experience</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Senior Software Engineer I</div>
+                        <div class="card-subtitle">HCLSoftware (BigFix Lifecycle Team)</div>
+                    </div>
+                    <div class="card-date">Sep 2025 – Present</div>
+                </div>
+                <ul>
+                    <li>Designed and implemented an automated WDAC application-control workflow integrated with BigFix, reducing policy deployment time by approximately 93%, from 30 minutes to under 2 minutes.</li>
+                    <li>Migrated an enterprise Java application from Java 8 to Java 18, updating application dependencies and resolving compatibility issues to support the upgraded runtime.</li>
+                    <li>Developed a standalone Go-based WDAC Manager for policy creation, rule management, XML generation, policy compilation, signing, deployment, and verification without relying on PowerShell.</li>
+                    <li>Contributed to production issue resolution, feature development, and testing for enterprise endpoint management capabilities in an Agile development environment.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Trainee Data Engineer</div>
+                        <div class="card-subtitle">Lognormal Analytics Pvt. Ltd.</div>
+                    </div>
+                    <div class="card-date">Mar 2023 – May 2023</div>
+                </div>
+                <ul>
+                    <li>Performed data cleaning, enrichment, and validation on large enterprise datasets to substantially improve data quality and consistency.</li>
+                    <li>Applied advanced outlier detection, missing-value imputation, and verification algorithms to build reliable data pipelines for downstream analytical models.</li>
+                    <li>Supported scalable ETL and data processing workflows utilized for critical business intelligence and reporting.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects & Research -->
+        <section>
+            <h2>Projects & Research</h2>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Enterprise Application Control Automation System</div>
+                        <div class="card-subtitle">Go, BigFix, WDAC, XML, Security Automation</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Designed and implemented an automated WDAC application-control workflow integrated with BigFix and built a standalone WDAC CLI supporting policy authoring, rule generation, XML-to-CIP compilation, signing, deployment, and verification.</li>
+                    <li>Configured comprehensive policy mechanisms supporting base and supplemental security schemas, enabling centralized rules with strict endpoint-level application enforcement.</li>
+                    <li>Implemented file hash, publisher certificate, attribute, and path-based allow/block rules, alongside COM and Package-based rules to extend enterprise security coverages.</li>
+                    <li>Integrated endpoint validation flows with Windows Code Integrity event tracking to audit whether policies activated correctly.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Movie Booking Ticket System</div>
+                        <div class="card-subtitle">Java, OOP, Collections, Concurrency</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Engineered an end-to-end backend booking system in Java emphasizing robust Object-Oriented Design patterns (Singleton, Factory, Strategy).</li>
+                    <li>Implemented dynamic seat map allocation, multi-tier pricing strategies, showtime schedule handling, and user authentication management.</li>
+                    <li>Utilized Java Collections Framework and exception-handling blocks to prevent double-booking conflicts during concurrent seat selections.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Interactive Tic-Tac-Toe Game</div>
+                        <div class="card-subtitle">C++, STL, Algorithms, Modular Design</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Developed a robust, highly modular console game in Modern C++ featuring customizable board sizes and dual play modes (Player vs. Player).</li>
+                    <li>Optimized game state evaluation loops using Standard Template Library (STL) vectors and efficient bitboard logic for instantaneous move validation.</li>
+                    <li>Integrated clean memory management principles (RAII) and robust input sanitization to ensure zero runtime segmentation faults or edge-case crashes.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Software Fault Localization Using Deep Learning</div>
+                        <div class="card-subtitle">Research Publication | Springer CCIS, COCOLE 2025</div>
+                    </div>
+                    <div class="card-date">
+                        <a href="https://doi.org/10.1007/978-3-032-16830-6_37" target="_blank" style="color: var(--primary); text-decoration: none;">DOI: 10.1007/978-3-032-16830-6_37 ↗</a>
+                    </div>
+                </div>
+                <ul>
+                    <li>Developed a Stacking Ensemble combining Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN) and Transformer architectures for automated software fault localization.</li>
+                    <li>Designed a multi-model learning approach to parse and rank potentially faulty program components directly from complex software execution traces.</li>
+                    <li>Improved fault localization accuracy by up to 60% compared to baseline traditional approaches, rigorously evaluated using EXAM_F, EXAM_L, and EXAM Score metrics.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+            <h2>Education</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">M.Tech in Computer Science and Engineering</div>
+                        <div class="card-subtitle">National Institute of Technology Warangal</div>
+                    </div>
+                    <div class="card-date">2023 – 2025 | CGPA: 7.48</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">B.Tech in Computer Science and Engineering</div>
+                        <div class="card-subtitle">Institute of Engineering and Rural Technology</div>
+                    </div>
+                    <div class="card-date">2019 – 2023 | CGPA: 8.28</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">Go</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>AI & Deep Learning</h3>
+                    <div class="skill-tags">
+                        <span class="tag">ANN / CNN</span>
+                        <span class="tag">Transformers</span>
+                        <span class="tag">Stacking Ensembles</span>
+                        <span class="tag">Predictive Modeling</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Systems & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="tag">BigFix</span>
+                        <span class="tag">WDAC</span>
+                        <span class="tag">Application Control</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>DevOps & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Jenkins</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category" style="grid-column: 1 / -1;">
+                    <h3>Core Concepts</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Data Structures & Algorithms</span>
+                        <span class="tag">Object-Oriented Programming (OOP)</span>
+                        <span class="tag">DBMS</span>
+                        <span class="tag">Operating Systems</span>
+                        <span class="tag">CI/CD Pipelines</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume">
+            <h2>Resume Preview</h2>
+            <div class="card" style="text-align: center;">
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">Preview your compiled PDF resume below or download a copy directly. (Note: Preview appears live once hosted on GitHub Pages or Vercel).</p>
+                <iframe src="resume.pdf" width="100%" height="600px" style="border: none; border-radius: 4px; background: white;"></iframe>
+                <div style="margin-top: 1.5rem;">
+                    <a href="resume.pdf" download="Amit_Jaiswal_Resume.pdf" class="btn btn-primary">Download PDF Resume</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Amit Jaiswal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeToggleBtn');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                btn.textContent = '🌙 Dark Mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.textContent = '☀️ Light Mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const body = document.body;
+            const btn = document.getElementById('themeToggleBtn');
+            
+            body.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'light') {
+                btn.textContent = '🌙 Dark Mode';
+            } else {
+                btn.textContent = '☀️ Light Mode';
+            }
+        });
+    </script>
+
+</body>
+</html>
